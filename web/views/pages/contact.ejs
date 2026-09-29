@@ -1,0 +1,27 @@
+<%- include('../partials/top') %>
+<section class="svc-hero contact-hero" aria-labelledby="c-title">
+  <%- svg.deco('blob', { color: '#F4E8D4', cls: 'svc-hero-blob' }) %>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Contact</li></ol></nav>
+    <div class="contact-grid">
+      <div class="contact-copy">
+        <p class="eyebrow reveal"><%- svg.icon('sparkles', { size: 16 }) %> Contact us</p>
+        <h1 id="c-title" class="h-hero h-hero--svc reveal">Let’s build something <span class="hl-wrap"><span class="hl">that sells.</span><%- svg.deco('underline', { color: '#E8D45A', cls: 'hl-line' }) %></span></h1>
+        <p class="hero-lead reveal">Tell us about your business and goals. We’ll get back within one business day with next steps — or reach us instantly below.</p>
+        <div class="contact-cards">
+          <a class="contact-card reveal" href="tel:<%= B.phone %>" data-cta="call"><span class="cc-ico cc-ico--purple"><%- svg.icon('phone', { size: 22 }) %></span><span><small>Call us</small><b><%= B.phoneDisplay %></b></span></a>
+          <button class="contact-card reveal" data-whatsapp><span class="cc-ico cc-ico--yellow"><%- svg.icon('whatsapp', { size: 22 }) %></span><span><small>WhatsApp</small><b>Chat with our team</b></span></button>
+          <a class="contact-card reveal" href="mailto:<%= B.email %>" data-cta="email"><span class="cc-ico cc-ico--pink"><%- svg.icon('mail', { size: 22 }) %></span><span><small>Email</small><b><%= B.email %></b></span></a>
+          <div class="contact-card reveal"><span class="cc-ico cc-ico--lav"><%- svg.icon('pin', { size: 22 }) %></span><span><small>Office</small><b><%= B.address %></b></span></div>
+        </div>
+        <p class="contact-hours reveal"><%- svg.icon('clock', { size: 16 }) %> Mon–Sat · 10:00 am – 7:00 pm IST</p>
+      </div>
+      <div class="form-card form-card--lg reveal">
+        <%- svg.deco('star', { size: 44, cls: 'fc-star' }) %>
+        <h2 class="h4">Send us an enquiry</h2>
+        <%- include('../partials/lead-form', { formUsed: 'contact', variant: 'full', idPrefix: 'contact', submitLabel: 'Submit enquiry' }) %>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/bottom') %>

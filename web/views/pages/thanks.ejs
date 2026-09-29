@@ -1,0 +1,17 @@
+<%- include('../partials/top') %>
+<section class="thanks" aria-labelledby="ty-title">
+  <%- svg.deco('blob', { color: '#F4E8D4', cls: 'thanks-blob' }) %>
+  <div class="container thanks-inner">
+    <div class="thanks-badge"><%- svg.icon('check', { size: 44, stroke: 3 }) %></div>
+    <h1 id="ty-title" class="h-display">Thank you! We’ve got your enquiry.</h1>
+    <% if (ref) { %><p class="ty-ref">Your reference: <b><%= ref %></b></p><% } %>
+    <p class="hero-lead">Our team will contact you shortly. Want a faster reply? Message us on WhatsApp.</p>
+    <div class="hero-actions hero-actions--center">
+      <a class="btn btn-primary btn-lg" href="<%= waLink('Hi Digital Guru, I just submitted an enquiry' + (ref ? ' (' + ref + ')' : '') + '.') %>" target="_blank" rel="noopener" data-cta="whatsapp"><%- svg.icon('whatsapp', { size: 20 }) %> Continue on WhatsApp</a>
+      <a class="btn btn-secondary btn-lg" href="/services">Explore services</a>
+    </div>
+    <%- svg.deco('star', { size: 50, cls: 'ty-star' }) %>
+  </div>
+</section>
+<script type="application/json" id="conversion" data-ref="<%= ref %>"></script>
+<%- include('../partials/bottom') %>

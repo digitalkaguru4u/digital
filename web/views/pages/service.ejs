@@ -1,0 +1,112 @@
+<%- include('../partials/top') %>
+
+<section class="svc-hero" aria-labelledby="svc-title">
+  <%- svg.deco('blob', { color: '#F4E8D4', cls: 'svc-hero-blob' }) %>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li aria-current="page"><%= svc.name %></li></ol>
+    </nav>
+    <div class="svc-hero-grid">
+      <div>
+        <p class="eyebrow reveal"><%- svg.icon(svg.SERVICE_ICON[svc.slug], { size: 16 }) %> <%= svc.kicker %></p>
+        <h1 id="svc-title" class="h-hero h-hero--svc reveal"><%= svc.h1 %></h1>
+        <p class="hero-lead reveal"><%= svc.intro %></p>
+        <div class="hero-actions reveal">
+          <button class="btn btn-primary btn-lg" data-quote data-service="<%= svc.slug %>" data-form="service">Get a <%= svc.name %> quote <%- svg.icon('arrow', { size: 20 }) %></button>
+          <button class="btn btn-secondary btn-lg" data-whatsapp data-service="<%= svc.slug %>"><%- svg.icon('whatsapp', { size: 20 }) %> WhatsApp</button>
+        </div>
+        <p class="svc-price reveal">Starting from <b><%= svc.startingPrice %></b> · Free consultation</p>
+      </div>
+      <div class="svc-hero-art reveal"><%- svg.illo(svc.illustration) %></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="incl-title">
+  <%- svg.deco('star', { size: 40, cls: 'incl-star' }) %>
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">What’s included</p>
+      <h2 id="incl-title" class="h-display">Everything in our <span class="text-purple"><%= svc.name %></span> service.</h2>
+    </div>
+    <div class="incl-grid">
+      <% svc.deliverables.forEach(function (d, i) { %>
+      <article class="incl-card reveal">
+        <span class="incl-n"><%= String(i + 1).padStart(2, '0') %></span>
+        <h3 class="h5"><%= d.t %></h3>
+        <p><%= d.d %></p>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section--purple process" aria-labelledby="how-title">
+  <%- svg.deco('squiggle', { size: 140, color: '#E8D45A', cls: 'pr-squiggle' }) %>
+  <div class="container">
+    <div class="section-head section-head--light reveal">
+      <p class="eyebrow eyebrow--light">How it works</p>
+      <h2 id="how-title" class="h-display">Our <%= svc.name.toLowerCase() %> process.</h2>
+    </div>
+    <ol class="steps">
+      <% svc.process.forEach(function (p, i) { %>
+      <li class="step reveal"><span class="step-n"><%= String(i + 1).padStart(2, '0') %></span><h3 class="h5"><%= p.t %></h3><p><%= p.d %></p>
+        <% if (i < svc.process.length - 1) { %><%- svg.deco('arrow', { size: 70, color: '#E8D45A', cls: 'step-arrow' }) %><% } %></li>
+      <% }) %>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--cream leadgen" id="enquire" aria-labelledby="enq-title">
+  <div class="container leadgen-grid">
+    <div class="leadgen-copy reveal">
+      <p class="eyebrow">Perfect for</p>
+      <h2 id="enq-title" class="h-display">Is <%= svc.name %> right for you?</h2>
+      <ul class="ticks">
+        <% svc.outcomes.forEach(function (o) { %><li><%- svg.icon('check', { size: 18 }) %> <%= o %></li><% }) %>
+      </ul>
+      <div class="contact-quick">
+        <a class="btn btn-secondary" href="tel:<%= B.phone %>" data-cta="call"><%- svg.icon('phone', { size: 18 }) %> <%= B.phoneDisplay %></a>
+      </div>
+    </div>
+    <div class="form-card reveal">
+      <%- svg.deco('star', { size: 40, cls: 'fc-star' }) %>
+      <h3 class="h4">Get a <%= svc.name %> quote</h3>
+      <p class="muted">Tell us a little about your business — we’ll reply with a plan and price.</p>
+      <%- include('../partials/lead-form', { formUsed: 'service', variant: 'compact', fixedService: svc.slug, idPrefix: 'svc', submitLabel: 'Request my quote' }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" aria-labelledby="sfaq-title">
+  <div class="container faq-grid">
+    <div class="reveal">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="sfaq-title" class="h-display"><%= svc.name %> <span class="text-purple">FAQs</span></h2>
+    </div>
+    <div class="faq-list">
+      <% svc.faqs.forEach(function (f) { %>
+      <details class="faq-item reveal"><summary><h3 class="h6"><%= f.q %></h3><span class="faq-plus"><%- svg.icon('plus', { size: 20 }) %></span></summary><p><%= f.a %></p></details>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section related" aria-labelledby="rel-title">
+  <div class="container">
+    <h2 id="rel-title" class="h3 reveal">Pairs well with</h2>
+    <div class="rel-grid">
+      <% related.forEach(function (r) { %>
+      <article class="rel-card reveal">
+        <span class="svc-ico"><%- svg.icon(svg.SERVICE_ICON[r.slug], { size: 22 }) %></span>
+        <h3 class="h5"><a class="stretched" href="/services/<%= r.slug %>"><%= r.name %></a></h3>
+        <p><%= r.short %></p>
+        <span class="svc-more">Learn more <%- svg.icon('arrowUpRight', { size: 18 }) %></span>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/final-cta', { ctaTitle: 'Let’s talk about your ' + svc.name.toLowerCase() + ' goals.', ctaService: svc.slug }) %>
+<%- include('../partials/bottom') %>

@@ -1,0 +1,67 @@
+<%
+  // params: formUsed, variant ('full'|'compact'), fixedService (slug), submitLabel, idPrefix
+  var fu = locals.formUsed || 'contact';
+  var variant = locals.variant || 'compact';
+  var fixed = locals.fixedService || '';
+  var pid = locals.idPrefix || fu;
+  var label = locals.submitLabel || 'Get my free quote';
+%>
+<form class="lead-form lead-form--<%= variant %>" data-lead-form novalidate>
+  <input type="hidden" name="formUsed" value="<%= fu %>">
+  <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+  <div class="field-grid">
+    <div class="field">
+      <label for="<%= pid %>-name">Your name <span aria-hidden="true">*</span></label>
+      <input id="<%= pid %>-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120" placeholder="e.g. Priya Sharma">
+    </div>
+    <div class="field">
+      <label for="<%= pid %>-phone">Phone / WhatsApp <span aria-hidden="true">*</span></label>
+      <input id="<%= pid %>-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required pattern="^\+?[0-9\s-]{8,16}$" placeholder="+91 98765 43210">
+    </div>
+    <div class="field">
+      <label for="<%= pid %>-email">Email</label>
+      <input id="<%= pid %>-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="you@company.com">
+    </div>
+    <% if (variant === 'full') { %>
+    <div class="field">
+      <label for="<%= pid %>-company">Company</label>
+      <input id="<%= pid %>-company" name="company" type="text" autocomplete="organization" maxlength="160" placeholder="Company / brand name">
+    </div>
+    <% } %>
+    <% if (fixed) { %>
+      <input type="hidden" name="service" value="<%= fixed %>">
+    <% } else { %>
+    <div class="field">
+      <label for="<%= pid %>-service">Service required</label>
+      <select id="<%= pid %>-service" name="service">
+        <option value="">Select a service</option>
+        <% formServices.forEach(function (s) { %><option value="<%= s.slug %>"><%= s.label %></option><% }) %>
+        <option value="">Not sure yet</option>
+      </select>
+    </div>
+    <% } %>
+    <div class="field">
+      <label for="<%= pid %>-budget">Approx. budget (₹)</label>
+      <input id="<%= pid %>-budget" name="budget" type="text" inputmode="numeric" maxlength="20" placeholder="e.g. 25,000">
+    </div>
+    <div class="field field--full">
+      <label for="<%= pid %>-message"><%= variant === 'full' ? 'Tell us about your project' : 'Message (optional)' %></label>
+      <textarea id="<%= pid %>-message" name="message" rows="<%= variant === 'full' ? 4 : 2 %>" maxlength="3000" placeholder="Your goals, timeline, current website…"></textarea>
+    </div>
+    <% if (variant === 'full') { %>
+    <fieldset class="field field--full chips-field">
+      <legend>Preferred contact method</legend>
+      <div class="chip-options">
+        <label class="chip-opt"><input type="radio" name="preferredContact" value="call"> <%- svg.icon('phone', { size: 16 }) %> Call</label>
+        <label class="chip-opt"><input type="radio" name="preferredContact" value="whatsapp" checked> <%- svg.icon('whatsapp', { size: 16 }) %> WhatsApp</label>
+        <label class="chip-opt"><input type="radio" name="preferredContact" value="email"> <%- svg.icon('mail', { size: 16 }) %> Email</label>
+      </div>
+    </fieldset>
+    <% } %>
+  </div>
+  <div class="ts-slot"></div>
+  <div class="form-error" role="alert" hidden></div>
+  <button class="btn btn-primary btn-block" type="submit"><span class="btn-label"><%= label %></span> <%- svg.icon('arrow', { size: 18 }) %></button>
+  <p class="form-note"><%- svg.icon('shield', { size: 14 }) %> We reply within one business day. No spam — see our <a href="/privacy-policy">privacy policy</a>.</p>
+</form>

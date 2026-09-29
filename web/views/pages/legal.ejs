@@ -1,0 +1,34 @@
+<%- include('../partials/top') %>
+<section class="section legal">
+  <div class="container prose">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page"><%= kind === 'privacy' ? 'Privacy Policy' : 'Terms of Use' %></li></ol></nav>
+    <% if (kind === 'privacy') { %>
+    <h1 class="h-display">Privacy Policy</h1>
+    <p class="muted">This is a starting template — have it reviewed by your legal advisor before launch.</p>
+    <h2 class="h4">What we collect</h2>
+    <p>When you submit an enquiry, we collect the details you provide (name, phone number, email, company, service of interest, budget and message) along with technical information such as the page you submitted from, how you arrived at our website (for example, campaign/UTM parameters and referring website), your IP address and browser type.</p>
+    <h2 class="h4">How we use it</h2>
+    <p>We use this information to respond to your enquiry, prepare quotes and proposals, follow up about our services, and measure which marketing channels are effective. We do not sell your personal information.</p>
+    <h2 class="h4">Communication</h2>
+    <p>By submitting an enquiry you agree that Digital Guru may contact you by phone, WhatsApp or email about your enquiry. You can ask us to stop at any time.</p>
+    <h2 class="h4">Cookies & analytics</h2>
+    <p>We use essential cookies for security (for example, to protect our forms) and may use analytics tools such as Google Analytics to understand website usage.</p>
+    <h2 class="h4">Data retention & your rights</h2>
+    <p>We keep enquiry records for as long as needed for business and legal purposes. You may request access to, correction of, or deletion of your personal data by emailing <a href="mailto:<%= B.email %>"><%= B.email %></a>.</p>
+    <h2 class="h4">Contact</h2>
+    <p>Digital Guru, <%= B.address %>. Email: <a href="mailto:<%= B.email %>"><%= B.email %></a>, Phone: <a href="tel:<%= B.phone %>"><%= B.phoneDisplay %></a>.</p>
+    <% } else { %>
+    <h1 class="h-display">Terms of Use</h1>
+    <p class="muted">This is a starting template — have it reviewed by your legal advisor before launch.</p>
+    <h2 class="h4">Use of this website</h2>
+    <p>The content on this website is for general information about Digital Guru’s services. Prices shown are indicative starting prices; final pricing is confirmed in a written quote or agreement.</p>
+    <h2 class="h4">Intellectual property</h2>
+    <p>All content, illustrations and branding on this website belong to Digital Guru unless stated otherwise and may not be reused without permission.</p>
+    <h2 class="h4">No guarantees</h2>
+    <p>Marketing results depend on many factors outside our control. Any examples or projections are illustrative and are not a guarantee of specific results.</p>
+    <h2 class="h4">Contact</h2>
+    <p>Questions about these terms? Email <a href="mailto:<%= B.email %>"><%= B.email %></a>.</p>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/bottom') %>

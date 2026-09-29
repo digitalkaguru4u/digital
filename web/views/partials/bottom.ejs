@@ -1,0 +1,98 @@
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand brand--light" href="/" aria-label="digitalguru — Digital Guru home"><%- svg.logoMark(40) %><span class="brand-word">digital<b>guru</b></span></a>
+      <p>A creative digital marketing agency building websites, campaigns and lead systems that turn clicks into customers.</p>
+      <div class="footer-contact">
+        <a href="tel:<%= B.phone %>" data-cta="call"><%- svg.icon('phone', { size: 16 }) %> <%= B.phoneDisplay %></a>
+        <a href="mailto:<%= B.email %>" data-cta="email"><%- svg.icon('mail', { size: 16 }) %> <%= B.email %></a>
+        <span><%- svg.icon('pin', { size: 16 }) %> <%= B.address %></span>
+      </div>
+    </div>
+    <nav aria-label="Services">
+      <p class="footer-title">Services</p>
+      <ul><% services.slice(0, 6).forEach(function (s) { %><li><a href="/services/<%= s.slug %>"><%= s.name %></a></li><% }) %></ul>
+    </nav>
+    <nav aria-label="More services">
+      <p class="footer-title">More</p>
+      <ul><% services.slice(6).forEach(function (s) { %><li><a href="/services/<%= s.slug %>"><%= s.name %></a></li><% }) %></ul>
+    </nav>
+    <nav aria-label="Company">
+      <p class="footer-title">Company</p>
+      <ul>
+        <li><a href="/#work">Our work</a></li>
+        <li><a href="/#process">How we work</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy-policy">Privacy policy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <%= year %> Digital Guru. All rights reserved.</p>
+    <p class="footer-made"><%- svg.deco('star', { size: 14 }) %> Websites · SEO · Ads · Leads</p>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp (desktop) -->
+<button class="wa-float" data-whatsapp aria-label="Chat with us on WhatsApp"><%- svg.icon('whatsapp', { size: 26 }) %><span>Chat with us</span></button>
+
+<!-- Sticky mobile CTA bar -->
+<nav class="mobile-cta" aria-label="Quick contact">
+  <a href="tel:<%= B.phone %>" data-cta="call"><%- svg.icon('phone', { size: 20 }) %><span>Call</span></a>
+  <button data-whatsapp><%- svg.icon('whatsapp', { size: 20 }) %><span>WhatsApp</span></button>
+  <button class="mobile-cta-primary" data-quote><%- svg.icon('send', { size: 20 }) %><span>Get Quote</span></button>
+</nav>
+
+<!-- Quote popup -->
+<dialog class="modal" id="quote-modal" aria-labelledby="quote-title">
+  <div class="modal-card">
+    <button class="modal-close" data-close aria-label="Close"><%- svg.icon('x', { size: 22 }) %></button>
+    <div class="modal-side" aria-hidden="true">
+      <%- svg.deco('blob', { color: '#E8D45A', cls: 'modal-blob' }) %>
+      <div class="modal-illo"><%- svg.illo('leadgen') %></div>
+      <ul class="modal-points">
+        <li><%- svg.icon('check', { size: 16 }) %> Free strategy call</li>
+        <li><%- svg.icon('check', { size: 16 }) %> Clear quote in 24 hrs</li>
+        <li><%- svg.icon('check', { size: 16 }) %> No lock-in contracts</li>
+      </ul>
+    </div>
+    <div class="modal-body">
+      <p class="eyebrow"><%- svg.icon('sparkles', { size: 16 }) %> Get a free quote</p>
+      <h2 id="quote-title" class="h3">Let’s grow your business.</h2>
+      <p class="muted">Share a few details and our team will get back to you shortly.</p>
+      <%- include('lead-form', { formUsed: 'popup', variant: 'compact', idPrefix: 'popup', submitLabel: 'Send my enquiry' }) %>
+    </div>
+  </div>
+</dialog>
+
+<!-- WhatsApp quick form -->
+<dialog class="modal modal--sm" id="wa-modal" aria-labelledby="wa-title">
+  <div class="modal-card">
+    <button class="modal-close" data-close aria-label="Close"><%- svg.icon('x', { size: 22 }) %></button>
+    <div class="modal-body">
+      <p class="eyebrow"><%- svg.icon('whatsapp', { size: 16 }) %> Chat on WhatsApp</p>
+      <h2 id="wa-title" class="h3">Say hi on WhatsApp</h2>
+      <p class="muted">Add your name and number so we can pick up the conversation even if you get disconnected.</p>
+      <form class="lead-form" data-lead-form data-wa-form novalidate>
+        <input type="hidden" name="formUsed" value="whatsapp_quick">
+        <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="field-grid">
+          <div class="field"><label for="wa-name">Your name *</label><input id="wa-name" name="name" required minlength="2" autocomplete="name"></div>
+          <div class="field"><label for="wa-phone">WhatsApp number *</label><input id="wa-phone" name="phone" type="tel" inputmode="tel" required pattern="^\+?[0-9\s-]{8,16}$" autocomplete="tel"></div>
+          <div class="field field--full"><label for="wa-service">I’m interested in</label>
+            <select id="wa-service" name="service"><option value="">Select a service</option><% formServices.forEach(function (s) { %><option value="<%= s.slug %>"><%= s.label %></option><% }) %></select></div>
+        </div>
+        <div class="ts-slot"></div>
+        <div class="form-error" role="alert" hidden></div>
+        <button class="btn btn-primary btn-block" type="submit"><%- svg.icon('whatsapp', { size: 18 }) %> <span class="btn-label">Continue to WhatsApp</span></button>
+        <a class="skip-wa" href="<%= waLink() %>" target="_blank" rel="noopener" data-cta="whatsapp">Skip and open WhatsApp directly</a>
+      </form>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

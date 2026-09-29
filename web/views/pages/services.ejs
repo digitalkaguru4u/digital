@@ -1,0 +1,31 @@
+<%- include('../partials/top') %>
+<section class="svc-hero svc-hero--index" aria-labelledby="sv-title">
+  <%- svg.deco('blob', { color: '#F4E8D4', cls: 'svc-hero-blob' }) %>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Services</li></ol></nav>
+    <div class="section-head reveal">
+      <p class="eyebrow"><%- svg.icon('sparkles', { size: 16 }) %> Our services</p>
+      <h1 id="sv-title" class="h-hero h-hero--svc">Digital marketing services that <span class="hl-wrap"><span class="hl">grow revenue.</span><%- svg.deco('underline', { color: '#E8D45A', cls: 'hl-line' }) %></span></h1>
+      <p class="hero-lead">Pick one service or combine them into a complete growth system. Every engagement starts with a free strategy call.</p>
+    </div>
+  </div>
+</section>
+<section class="section section--tight">
+  <div class="container">
+    <div class="svc-index">
+      <% services.forEach(function (s, i) { %>
+      <article class="svc-card svc-card--idx svc-card--<%= ['a','b','c','d'][i % 4] %> reveal">
+        <div class="svc-art"><%- svg.illo(s.illustration) %></div>
+        <div class="svc-body">
+          <h2 class="h4"><a class="stretched" href="/services/<%= s.slug %>"><%= s.name %></a></h2>
+          <p><%= s.short %></p>
+          <p class="svc-from">From <b><%= s.startingPrice %></b></p>
+          <span class="svc-more">Explore <%- svg.icon('arrowUpRight', { size: 18 }) %></span>
+        </div>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<%- include('../partials/final-cta') %>
+<%- include('../partials/bottom') %>

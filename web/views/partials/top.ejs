@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title><%= seo.title %></title>
+  <meta name="description" content="<%= seo.description %>">
+  <link rel="canonical" href="<%= seo.canonical %>">
+  <% if (seo.noindex) { %><meta name="robots" content="noindex, follow"><% } else { %><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"><% } %>
+  <meta name="theme-color" content="#302060">
+  <meta name="format-detection" content="telephone=no">
+  <% if (googleVerification) { %><meta name="google-site-verification" content="<%= googleVerification %>"><% } %>
+
+  <meta property="og:type" content="<%= seo.ogType %>">
+  <meta property="og:site_name" content="Digital Guru">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" content="<%= seo.title %>">
+  <meta property="og:description" content="<%= seo.description %>">
+  <meta property="og:url" content="<%= seo.canonical %>">
+  <meta property="og:image" content="<%= seo.ogImage %>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Digital Guru — Turn clicks into real customers">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= seo.title %>">
+  <meta name="twitter:description" content="<%= seo.description %>">
+  <meta name="twitter:image" content="<%= seo.ogImage %>">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="<%= asset('/assets/css/site.css') %>">
+  <script src="<%= asset('/assets/js/site.js') %>" defer></script>
+  <% if (turnstileKey) { %><script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script><% } %>
+  <% jsonld.forEach(function (j) { %><script type="application/ld+json"><%- JSON.stringify(j).replace(/</g, '\\u003c') %></script>
+  <% }) %>
+</head>
+<body data-wa="<%= B.whatsapp %>" data-ga="<%= ga4Id %>" data-turnstile="<%= turnstileKey %>">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="digitalguru — Digital Guru home">
+      <%- svg.logoMark(40) %>
+      <span class="brand-word">digital<b>guru</b></span>
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main">
+      <ul>
+        <li class="has-menu">
+          <button class="nav-link menu-toggle" aria-expanded="false" aria-controls="services-menu">Services <%- svg.icon('chevronDown', { size: 16 }) %></button>
+          <div class="mega" id="services-menu">
+            <div class="mega-grid">
+              <% services.forEach(function (s) { %>
+              <a class="mega-item" href="/services/<%= s.slug %>">
+                <span class="mega-ico"><%- svg.icon(svg.SERVICE_ICON[s.slug], { size: 18 }) %></span>
+                <span><b><%= s.name %></b><small><%= s.short %></small></span>
+              </a>
+              <% }) %>
+            </div>
+            <a class="mega-all" href="/services">View all services <%- svg.icon('arrow', { size: 16 }) %></a>
+          </div>
+        </li>
+        <li><a class="nav-link" href="/#work">Work</a></li>
+        <li><a class="nav-link" href="/#process">Process</a></li>
+        <li><a class="nav-link" href="/#pricing">Pricing</a></li>
+        <li><a class="nav-link" href="/#faq">FAQ</a></li>
+        <li><a class="nav-link <%= currentPath === '/contact' ? 'is-active' : '' %>" href="/contact">Contact</a></li>
+      </ul>
+      <div class="nav-mobile-cta">
+        <a class="btn btn-secondary" href="tel:<%= B.phone %>" data-cta="call"><%- svg.icon('phone', { size: 18 }) %> Call <%= B.phoneDisplay %></a>
+        <button class="btn btn-primary" data-quote>Get a Free Quote <%- svg.icon('arrow', { size: 18 }) %></button>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn hide-sm" href="tel:<%= B.phone %>" data-cta="call" aria-label="Call Digital Guru"><%- svg.icon('phone', { size: 19 }) %></a>
+      <button class="icon-btn hide-sm" data-whatsapp aria-label="Chat on WhatsApp"><%- svg.icon('whatsapp', { size: 19 }) %></button>
+      <button class="btn btn-primary btn-sm hide-sm" data-quote>Get a Quote</button>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><%- svg.icon('menu', { size: 24 }) %></button>
+    </div>
+  </div>
+</header>
+<main id="main">

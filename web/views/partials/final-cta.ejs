@@ -1,0 +1,17 @@
+<section class="final-cta" aria-labelledby="final-cta-title">
+  <div class="container final-cta-inner reveal">
+    <%- svg.deco('star', { size: 54, cls: 'fc-star-1' }) %>
+    <%- svg.deco('cross', { size: 26, color: '#F4B0B0', cls: 'fc-cross' }) %>
+    <%- svg.deco('dots', { size: 90, color: '#807CB0', cls: 'fc-dots' }) %>
+    <div>
+      <p class="eyebrow eyebrow--light"><%- svg.icon('sparkles', { size: 16 }) %> Free 30-minute strategy call</p>
+      <h2 id="final-cta-title" class="h-display"><%= locals.ctaTitle || 'Ready to turn your website into a lead machine?' %></h2>
+      <p class="lead-light">Tell us where you want to grow. We’ll come back with a clear plan, timeline and quote — no obligation.</p>
+    </div>
+    <div class="final-cta-actions">
+      <button class="btn btn-yellow btn-lg" data-quote <% if (locals.ctaService) { %>data-service="<%= ctaService %>"<% } %>>Get a Free Quote <%- svg.icon('arrow', { size: 20 }) %></button>
+      <button class="btn btn-ghost-light btn-lg" data-whatsapp><%- svg.icon('whatsapp', { size: 20 }) %> WhatsApp us</button>
+      <a class="fc-call" href="tel:<%= B.phone %>" data-cta="call"><%- svg.icon('phone', { size: 16 }) %> or call <%= B.phoneDisplay %></a>
+    </div>
+  </div>
+</section>

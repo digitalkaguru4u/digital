@@ -1,0 +1,18 @@
+# Local/prod stack: MongoDB + app.  Usage:
+#   cp .env.example .env   (edit values)   &&   docker compose up -d --build
+#   docker compose exec app npm run seed
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes: [mongo-data:/data/db]
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/digital_guru
+    ports: ["4000:4000"]
+    depends_on: [mongo]
+volumes:
+  mongo-data:

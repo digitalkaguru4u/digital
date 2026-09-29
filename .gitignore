@@ -1,0 +1,9 @@
+node_modules/
+admin/node_modules/
+admin/dist/
+# secrets — real values live only in Render → Environment (or your local .env)
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store

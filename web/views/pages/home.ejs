@@ -1,0 +1,245 @@
+<%- include('../partials/top') %>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <%- svg.deco('blob', { color: '#F4E8D4', cls: 'hero-blob' }) %>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow reveal"><%- svg.icon('sparkles', { size: 16 }) %> <%= site.hero.eyebrow %></p>
+      <h1 id="hero-title" class="h-hero reveal">
+        <%= site.hero.titleA %><br>
+        <span class="hl-wrap"><span class="hl"><%= site.hero.titleB %></span><%- svg.deco('underline', { color: '#E8D45A', cls: 'hl-line' }) %></span>
+      </h1>
+      <p class="hero-lead reveal"><%= site.hero.lead %></p>
+      <div class="hero-actions reveal">
+        <button class="btn btn-primary btn-lg" data-quote>Get a Free Quote <%- svg.icon('arrow', { size: 20 }) %></button>
+        <button class="btn btn-secondary btn-lg" data-whatsapp><%- svg.icon('whatsapp', { size: 20 }) %> WhatsApp us</button>
+      </div>
+      <a class="hero-call reveal" href="tel:<%= B.phone %>" data-cta="call"><span class="hero-call-ico"><%- svg.icon('phone', { size: 16 }) %></span> Prefer to talk? Call <b><%= B.phoneDisplay %></b></a>
+      <ul class="hero-chips reveal" aria-label="What we do">
+        <% site.hero.chips.forEach(function (c, i) { %><li class="chip chip--<%= ['purple','yellow','pink','lav','cream'][i % 5] %>"><%= c %></li><% }) %>
+      </ul>
+    </div>
+    <div class="hero-art">
+      <%- svg.deco('arrow', { size: 110, color: '#7040F0', cls: 'hero-arrow' }) %>
+      <%- svg.illo('hero') %>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <% for (var r = 0; r < 2; r++) { services.forEach(function (s) { %><span><%= s.name %></span><%- svg.deco('star', { size: 22 }) %><% }) } %>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section section--cream services" id="services" aria-labelledby="services-title">
+  <%- svg.deco('dots', { size: 90, color: '#807CB0', cls: 'sv-dots' }) %>
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">What we do</p>
+      <h2 id="services-title" class="h-display">Everything you need to <span class="scribble">get found</span>, get chosen and get paid.</h2>
+      <p class="section-lead">From your first website to full-funnel campaigns — one team, one strategy, one goal: more customers.</p>
+    </div>
+
+    <div class="svc-feature">
+      <% var featured = ['website-development', 'seo', 'google-ads'].map(function (s) { return services.find(function (x) { return x.slug === s; }); }); %>
+      <% featured.forEach(function (s, i) { %>
+      <article class="svc-card svc-card--big svc-card--<%= ['a','b','c'][i] %> reveal">
+        <div class="svc-art"><%- svg.illo(s.illustration) %></div>
+        <div class="svc-body">
+          <h3 class="h4"><a href="/services/<%= s.slug %>" class="stretched"><%= s.name %></a></h3>
+          <p><%= s.short %></p>
+          <span class="svc-more">Explore <%- svg.icon('arrowUpRight', { size: 18 }) %></span>
+        </div>
+      </article>
+      <% }) %>
+    </div>
+
+    <ul class="svc-list">
+      <% services.filter(function (s) { return ['website-development','seo','google-ads'].indexOf(s.slug) === -1; }).forEach(function (s) { %>
+      <li class="svc-row reveal">
+        <span class="svc-ico"><%- svg.icon(svg.SERVICE_ICON[s.slug], { size: 22 }) %></span>
+        <a href="/services/<%= s.slug %>" class="stretched"><b><%= s.name %></b></a>
+        <span class="svc-row-desc"><%= s.short %></span>
+        <span class="svc-row-arrow"><%- svg.icon('arrow', { size: 20 }) %></span>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section why" aria-labelledby="why-title">
+  <%- svg.deco('star', { size: 46, cls: 'why-star' }) %>
+  <%- svg.deco('circle', { size: 70, color: '#E8D45A', cls: 'why-circle' }) %>
+  <div class="container why-grid">
+    <div class="why-intro reveal">
+      <p class="eyebrow">Why Digital Guru</p>
+      <h2 id="why-title" class="h-display">Creative that stands out. <span class="text-purple">Systems that sell.</span></h2>
+      <p class="section-lead">Most agencies stop at clicks. We connect your website, ads and lead follow-up into one system — so you can see exactly which rupee brought which customer.</p>
+      <button class="btn btn-secondary" data-quote>Talk to a strategist <%- svg.icon('arrow', { size: 18 }) %></button>
+    </div>
+    <div class="why-cards">
+      <% site.why.forEach(function (w, i) { %>
+      <article class="why-card why-card--<%= i %> reveal">
+        <span class="why-ico"><%- svg.icon(w.icon, { size: 24 }) %></span>
+        <h3 class="h5"><%= w.t %></h3>
+        <p><%= w.d %></p>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section section--purple process" id="process" aria-labelledby="process-title">
+  <%- svg.deco('squiggle', { size: 140, color: '#E8D45A', cls: 'pr-squiggle' }) %>
+  <%- svg.deco('star', { size: 40, color: '#F4B0B0', cls: 'pr-star' }) %>
+  <div class="container">
+    <div class="section-head section-head--light reveal">
+      <p class="eyebrow eyebrow--light">How we work</p>
+      <h2 id="process-title" class="h-display">From first call to first lead in <span class="text-yellow">four simple steps.</span></h2>
+    </div>
+    <ol class="steps">
+      <% site.process.forEach(function (p, i) { %>
+      <li class="step reveal">
+        <span class="step-n"><%= p.n %></span>
+        <h3 class="h5"><%= p.t %></h3>
+        <p><%= p.d %></p>
+        <% if (i < site.process.length - 1) { %><%- svg.deco('arrow', { size: 70, color: '#E8D45A', cls: 'step-arrow' }) %><% } %>
+      </li>
+      <% }) %>
+    </ol>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section work" id="work" aria-labelledby="work-title">
+  <div class="container">
+    <div class="section-head section-head--row reveal">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h2 id="work-title" class="h-display">Work that moves <span class="scribble">the numbers.</span></h2>
+      </div>
+      <button class="btn btn-secondary" data-quote>Start your project <%- svg.icon('arrow', { size: 18 }) %></button>
+    </div>
+    <div class="work-grid">
+      <% site.portfolio.forEach(function (p, i) { %>
+      <article class="work-card work-card--<%= p.color %> reveal">
+        <div class="work-art"><%- svg.portfolioArt(p.art, p.title) %></div>
+        <div class="work-body">
+          <div class="work-tags"><span class="tag"><%= p.tag %></span><% if (p.sample) { %><span class="tag tag--sample" title="Replace with a real case study before launch">Sample</span><% } %></div>
+          <h3 class="h4"><%= p.title %></h3>
+          <p><%= p.result %></p>
+          <p class="work-metric"><%- svg.icon('trending', { size: 18 }) %> <%= p.metric %></p>
+        </div>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section class="section section--cream leadgen" id="get-quote" aria-labelledby="lead-title">
+  <div class="container leadgen-grid">
+    <div class="leadgen-copy reveal">
+      <p class="eyebrow">Free growth plan</p>
+      <h2 id="lead-title" class="h-display">Tell us your goal. We’ll map the <span class="text-purple">fastest route to leads.</span></h2>
+      <ul class="ticks">
+        <li><%- svg.icon('check', { size: 18 }) %> A quick audit of your website and ads</li>
+        <li><%- svg.icon('check', { size: 18 }) %> Channel plan with realistic cost per lead</li>
+        <li><%- svg.icon('check', { size: 18 }) %> Fixed quote, timelines and next steps</li>
+      </ul>
+      <div class="leadgen-art"><%- svg.illo('leadgen') %></div>
+    </div>
+    <div class="form-card reveal">
+      <%- svg.deco('star', { size: 40, cls: 'fc-star' }) %>
+      <h3 class="h4">Get your free quote</h3>
+      <%- include('../partials/lead-form', { formUsed: 'hero', variant: 'compact', idPrefix: 'home', submitLabel: 'Get my free growth plan' }) %>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section industries" aria-labelledby="ind-title">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Industries we serve</p>
+      <h2 id="ind-title" class="h-display">Built for businesses that <span class="scribble">run on enquiries.</span></h2>
+    </div>
+    <ul class="ind-cloud">
+      <% site.industries.forEach(function (it, i) { %><li class="ind reveal ind--<%= i % 4 %>"><%- svg.icon(it.icon, { size: 20 }) %> <%= it.t %></li><% }) %>
+    </ul>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<% if (site.testimonials && site.testimonials.length) { %>
+<section class="section testimonials" aria-labelledby="t-title">
+  <%- svg.deco('sparkle', { size: 50, color: '#7040F0', cls: 't-sparkle' }) %>
+  <%- svg.deco('dot', { size: 22, color: '#F4B0B0', cls: 't-dot' }) %>
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Kind words</p>
+      <h2 id="t-title" class="h-display">What clients say about <span class="text-purple">working with us.</span></h2>
+    </div>
+    <div class="t-grid">
+      <% site.testimonials.forEach(function (t, i) { %>
+      <figure class="t-card t-card--<%= i %> reveal">
+        <%- svg.icon('quote', { size: 30, cls: 't-quote' }) %>
+        <blockquote><p><%= t.quote %></p></blockquote>
+        <figcaption><span class="t-avatar" aria-hidden="true"><%= t.name.charAt(0) %></span><span><b><%= t.name %></b><small><%= t.role %></small></span><% if (t.sample) { %><span class="tag tag--sample">Sample</span><% } %></figcaption>
+      </figure>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- PRICING -->
+<section class="section section--cream pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Starting packages</p>
+      <h2 id="pricing-title" class="h-display">Simple pricing. <span class="scribble">No surprises.</span></h2>
+      <p class="section-lead">Indicative starting prices. Every business is different — we’ll send a fixed quote after a free call. Ad spend is paid directly to Google/Meta.</p>
+    </div>
+    <div class="price-grid">
+      <% site.pricing.forEach(function (p) { %>
+      <article class="price-card <%= p.best ? 'price-card--best' : '' %> reveal">
+        <% if (p.best) { %><span class="price-badge"><%- svg.icon('star', { size: 14 }) %> Most popular</span><% } %>
+        <h3 class="h5"><%= p.name %></h3>
+        <p class="price"><span class="price-from">from</span> <b><%= p.price %></b> <span class="price-unit"><%= p.unit %></span></p>
+        <ul><% p.features.forEach(function (f) { %><li><%- svg.icon('check', { size: 16 }) %> <%= f %></li><% }) %></ul>
+        <button class="btn <%= p.best ? 'btn-yellow' : 'btn-primary' %> btn-block" data-quote data-service="<%= p.service %>" data-form="pricing">Get a quote <%- svg.icon('arrow', { size: 18 }) %></button>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-grid">
+    <div class="reveal">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-title" class="h-display">Questions? <span class="text-purple">Answers.</span></h2>
+      <p class="section-lead">Can’t find what you’re looking for? Message us on WhatsApp — a real person replies.</p>
+      <button class="btn btn-secondary" data-whatsapp><%- svg.icon('whatsapp', { size: 18 }) %> Ask on WhatsApp</button>
+    </div>
+    <div class="faq-list">
+      <% site.faqs.forEach(function (f) { %>
+      <details class="faq-item reveal">
+        <summary><h3 class="h6"><%= f.q %></h3><span class="faq-plus"><%- svg.icon('plus', { size: 20 }) %></span></summary>
+        <p><%= f.a %></p>
+      </details>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/final-cta') %>
+<%- include('../partials/bottom') %>
